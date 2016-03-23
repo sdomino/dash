@@ -1,0 +1,14 @@
+{
+  "name": "dash",
+  "version": "0.0.1",
+  "ignore": [
+    "**/.*",
+    ".gitignore",
+    "gulpfile.*",
+    "LICENSE",
+    "node_modules",
+    "package.json",
+    "README.md",
+    "src"
+  ]
+}
