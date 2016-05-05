@@ -3,11 +3,11 @@
 ;dash = {
 
   #
-  _backlog:     [ ]         # used to store logs for review later
-  _logLevels:   [ "TRACE", "DEBUG", "INFO", "WARN", "ERROR", "FATAL", "SILENT" ] # all available log levels
-  _logsEnabled: true        # logs enabled by default
   _prefix:      "dash"      # used as a prefix for log output
+  _logsEnabled: true        # logs enabled by default
+  _logLevels:   ["TRACE", "DEBUG", "INFO", "WARN", "ERROR", "FATAL", "SILENT"] # all available log levels
   _logLevel:    "DEBUG"     # logs set to DEBUG by default
+  _backlog:     [ ]         # used to store logs for review later
 
   # log prints a given message if logs are enabled and the level of the log is less than the log level
   _log : (opts) ->
@@ -54,10 +54,10 @@
   # set log level
   setLevel : (level) ->
 
-    # make sure the desired level is one of the available levels
+    #
     lvl = level.toUpperCase()
-    if lvl.indexOf(@_logLevels) != -1
-      @_logLevel = lvl
-    else
-      @error "Unsupported log level #{level}"
+
+    # make sure the desired level is one of the available levels
+    if @_logLevels.includes(lvl) then @_logLevel = lvl
+    else @error "Unsupported log level '#{lvl}'"
 }

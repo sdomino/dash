@@ -2,11 +2,11 @@ var dash,
   slice = [].slice;
 
 dash = {
-  _backlog: [],
-  _logLevels: ["TRACE", "DEBUG", "INFO", "WARN", "ERROR", "FATAL", "SILENT"],
-  _logsEnabled: true,
   _prefix: "dash",
+  _logsEnabled: true,
+  _logLevels: ["TRACE", "DEBUG", "INFO", "WARN", "ERROR", "FATAL", "SILENT"],
   _logLevel: "DEBUG",
+  _backlog: [],
   _log: function(opts) {
     var log;
     log = {
@@ -109,10 +109,10 @@ dash = {
   setLevel: function(level) {
     var lvl;
     lvl = level.toUpperCase();
-    if (lvl.indexOf(this._logLevels) !== -1) {
+    if (this._logLevels.includes(lvl)) {
       return this._logLevel = lvl;
     } else {
-      return this.error("Unsupported log level " + level);
+      return this.error("Unsupported log level '" + lvl + "'");
     }
   }
 };
