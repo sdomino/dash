@@ -1,6 +1,6 @@
 # dash is a simple wrapper around console.log that provides some pretty output,
 # log levels, a log prefix, and a backlog
-;dash = {
+;class dash
 
   #
   _prefix:      "dash"      # used as a prefix for log output
@@ -8,6 +8,9 @@
   _logLevels:   ["TRACE", "DEBUG", "INFO", "WARN", "ERROR", "FATAL", "SILENT"] # all available log levels
   _logLevel:    "DEBUG"     # logs set to DEBUG by default
   _backlog:     [ ]         # used to store logs for review later
+
+  # constructor
+  constructor : () ->
 
   # log prints a given message if logs are enabled and the level of the log is less than the log level
   _log : (opts) ->
@@ -60,4 +63,3 @@
     # make sure the desired level is one of the available levels
     if @_logLevels.includes(lvl) then @_logLevel = lvl
     else @error "Unsupported log level '#{lvl}'"
-}

@@ -1,13 +1,20 @@
 var dash,
   slice = [].slice;
 
-dash = {
-  _prefix: "dash",
-  _logsEnabled: true,
-  _logLevels: ["TRACE", "DEBUG", "INFO", "WARN", "ERROR", "FATAL", "SILENT"],
-  _logLevel: "DEBUG",
-  _backlog: [],
-  _log: function(opts) {
+dash = (function() {
+  dash.prototype._prefix = "dash";
+
+  dash.prototype._logsEnabled = true;
+
+  dash.prototype._logLevels = ["TRACE", "DEBUG", "INFO", "WARN", "ERROR", "FATAL", "SILENT"];
+
+  dash.prototype._logLevel = "DEBUG";
+
+  dash.prototype._backlog = [];
+
+  function dash() {}
+
+  dash.prototype._log = function(opts) {
     var log;
     log = {
       args: opts.args,
@@ -24,8 +31,9 @@ dash = {
         return console.log("%c[" + this._prefix + ".log] " + log.level + " :: " + log.msg, log.styles);
       }
     }
-  },
-  trace: function() {
+  };
+
+  dash.prototype.trace = function() {
     var args, msg;
     msg = arguments[0], args = 2 <= arguments.length ? slice.call(arguments, 1) : [];
     return this._log({
@@ -34,8 +42,9 @@ dash = {
       msg: msg,
       args: args
     });
-  },
-  debug: function() {
+  };
+
+  dash.prototype.debug = function() {
     var args, msg;
     msg = arguments[0], args = 2 <= arguments.length ? slice.call(arguments, 1) : [];
     return this._log({
@@ -44,8 +53,9 @@ dash = {
       msg: msg,
       args: args
     });
-  },
-  info: function() {
+  };
+
+  dash.prototype.info = function() {
     var args, msg;
     msg = arguments[0], args = 2 <= arguments.length ? slice.call(arguments, 1) : [];
     return this._log({
@@ -54,8 +64,9 @@ dash = {
       msg: msg,
       args: args
     });
-  },
-  warn: function() {
+  };
+
+  dash.prototype.warn = function() {
     var args, msg;
     msg = arguments[0], args = 2 <= arguments.length ? slice.call(arguments, 1) : [];
     return this._log({
@@ -64,8 +75,9 @@ dash = {
       msg: msg,
       args: args
     });
-  },
-  error: function() {
+  };
+
+  dash.prototype.error = function() {
     var args, msg;
     msg = arguments[0], args = 2 <= arguments.length ? slice.call(arguments, 1) : [];
     return this._log({
@@ -74,8 +86,9 @@ dash = {
       msg: msg,
       args: args
     });
-  },
-  fatal: function() {
+  };
+
+  dash.prototype.fatal = function() {
     var args, msg;
     msg = arguments[0], args = 2 <= arguments.length ? slice.call(arguments, 1) : [];
     return this._log({
@@ -84,8 +97,9 @@ dash = {
       msg: msg,
       args: args
     });
-  },
-  backlog: function() {
+  };
+
+  dash.prototype.backlog = function() {
     var i, len, log, ref, results;
     ref = this._backlog;
     results = [];
@@ -94,19 +108,23 @@ dash = {
       results.push(console.log("%c(" + log.timestamp + ") [" + this._prefix + ".backlog] " + log.level + " :: " + log.msg, log.styles, log.args));
     }
     return results;
-  },
-  enableLogs: function() {
+  };
+
+  dash.prototype.enableLogs = function() {
     this.warn(this._prefix + " logs enabled");
     return this._logsEnabled = true;
-  },
-  disableLogs: function() {
+  };
+
+  dash.prototype.disableLogs = function() {
     this.warn(this._prefix + " logs disabled");
     return this._logsEnabled = false;
-  },
-  setPrefix: function(prefix) {
+  };
+
+  dash.prototype.setPrefix = function(prefix) {
     return this._prefix = prefix;
-  },
-  setLevel: function(level) {
+  };
+
+  dash.prototype.setLevel = function(level) {
     var lvl;
     lvl = level.toUpperCase();
     if (this._logLevels.includes(lvl)) {
@@ -114,5 +132,8 @@ dash = {
     } else {
       return this.error("Unsupported log level '" + lvl + "'");
     }
-  }
-};
+  };
+
+  return dash;
+
+})();
