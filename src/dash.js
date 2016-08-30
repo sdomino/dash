@@ -4,7 +4,7 @@ var dash,
 dash = (function() {
   dash.prototype._prefix = "dash";
 
-  dash.prototype._logsEnabled = true;
+  dash.prototype._logsEnabled = false;
 
   dash.prototype._logLevels = ["TRACE", "DEBUG", "INFO", "WARN", "ERROR", "FATAL", "SILENT"];
 

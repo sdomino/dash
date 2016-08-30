@@ -4,7 +4,7 @@
 
   #
   _prefix:      "dash"      # used as a prefix for log output
-  _logsEnabled: true        # logs enabled by default
+  _logsEnabled: false       # logs disabled by default
   _logLevels:   ["TRACE", "DEBUG", "INFO", "WARN", "ERROR", "FATAL", "SILENT"] # all available log levels
   _logLevel:    "DEBUG"     # logs set to DEBUG by default
   _backlog:     [ ]         # used to store logs for review later
